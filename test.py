@@ -17,14 +17,14 @@ datasets = _config.datasets
 n_classes = _config.n_classes
 labels = _config.labels
 
-n_epoch = 1
+n_epochs = 3
 model_type = 'svc'
 kernel = 'rbf'
 traverse_list = ['a9a']
 
 map_size = 128
 blocks = [2, 2, 2, 2]
-rate_list = [0.5]
+rate_list = [0.4, 0.5, 0.6]
 
 lr = 0.01
 
@@ -128,7 +128,7 @@ for name in traverse_list:
                 gdm.prepare_data(X_train, X_test, params, X_map[0][0].numpy(), coef_map.numpy(), label)
 
                 #训练
-                trainer = pl.Trainer(callbacks=[early_stop_callback], max_epochs=1)
+                trainer = pl.Trainer(callbacks=[early_stop_callback], max_epochs=n_epochs)
                 trainer.fit(compression_net, gdm)  # 单轮测试
 
                 #测试
